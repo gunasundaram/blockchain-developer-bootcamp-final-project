@@ -1,24 +1,18 @@
 # blockchain-developer-bootcamp-final-project
-Blockchain Developer Bootcamp Final Project
+1. Customer enrolls for loyalty program
 
-Blockchain Developer Bootcamp Final Project
+function enroll() public returns (bool){
+}
 
-User Repository
+2. Customer purchases an Item
+function purchaseItem(uint _sku) public{
+}
 
-User A and B registers
+3. Customer earns loyalty points
+function earnLoyaltyPoints(uint _points) public {
+}
 
-User A's and B's idenity are stored in the blockchain
-
-User A's role is Customer
-
-User B's role is Business Entity
-
-User A stores their data in the blockchain
-
-User A grants access to their data in the blockchain to User B
-
-User B is able to access User A's data
-
-User A revokes access to their data in the blockchain from User B
-
-User B is unable to access User A's data
+4. Customer checks the balance of loyalty points
+function getBalanceLoyaltyPoints() public view
+returns (uint){
+}
