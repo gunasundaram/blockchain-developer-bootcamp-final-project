@@ -1,0 +1,61 @@
+
+const CDTYPE = "ContractDefinition";
+const CNAME = "Loyalty";
+const contractDefn = ca =>
+  ca.ast.nodes.find(n => n.nodeType === CDTYPE && n.name === CNAME);
+
+const items = (ca) => {
+  const item = contractDefn(ca).nodes.find((n) => n.name === "Item");
+  if (!item) return null;
+
+  return item
+    .members
+    .map((t) => ({
+      name: t.name,
+      nodeType: t.nodeType,
+      stateVariable: t.stateVariable,
+      type: t.typeName.name || t.typeName.pathNode.name, 
+      mutability: t.typeName.stateMutability,
+    }));
+};
+
+const customers = (ca) => {
+    const customer = contractDefn(ca).nodes.find((n) => n.name === "Customer");
+    if (!customer) return null;
+  
+    return customer
+      .members
+      .map((t) => ({
+        name: t.name,
+        nodeType: t.nodeType,
+        stateVariable: t.stateVariable,
+        type: t.typeName.name || t.typeName.pathNode.name, 
+        mutability: t.typeName.stateMutability,
+      }));
+  };
+
+const isDefined = members => variableName => {
+  return members 
+    ? members.find((item) => item.name === variableName) 
+    : null;
+};
+
+const isPayable = members => variableName => {
+  if (members === undefined) return false;
+  const definition = members.find((item) => item.name === variableName);
+  return definition && definition.mutability === "payable";
+};
+
+const isType = members => variableName => type => {
+  if (members === undefined) return false;
+  const definition = members.find((item) => item.name === variableName);
+  return definition && definition.type === type;
+};
+
+module.exports = {
+  items,
+  customers,
+  isDefined,
+  isPayable,
+  isType,
+};

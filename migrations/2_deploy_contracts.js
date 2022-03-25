@@ -1,5 +1,7 @@
-var SimpleStorage = artifacts.require("./SimpleStorage.sol");
+"use strict";
 
-module.exports = function(deployer) {
-  deployer.deploy(SimpleStorage);
+var Loyalty = artifacts.require("./Loyalty.sol");
+
+module.exports = function(deployer, network, accounts) {
+  deployer.deploy(Loyalty, accounts[1]);
 };
